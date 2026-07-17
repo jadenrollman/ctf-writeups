@@ -1,0 +1,36 @@
+######################################## PATH TRAVERSAL 1 ########################################
+
+ 1. challenge files are located in /challenge
+
+ 2. files --> directory containing index.html
+
+ 3. server --> python program that serves challenge files over HTTP
+	--> contains app.run flask fixture at the end, which is URL to use
+	--> http://challenge.localhost:80
+
+ 4. open tmux --> start the server in another shell session
+
+ 5. python program contains @app.route, passing in "/filesystem/:<path:path>", methods=["GET"]
+	--> @app.route is a flask app routing fixture
+
+ 6. instructions provide a hint to use "curl -v [url]" to see if query is being recieved by server
+	--> app route has the directory, in this case, directory is /filesystem
+	--> curl -v http://challenge.localhost:80/filesystem
+
+ 7. running curl command "curl -v http://challenge.localhost:80/filesystem" shows "Welcome to Web Security!"
+	*NOT THE FLAG!* --> maybe on the right track?
+
+ 8. viewing index.html in /challenge/files shows same message
+
+ 9. when viewing debug log on pane running server, shows requested_path='/challenge/files/index.html'
+	--> this only shows when a valid path request goes through
+
+10. using the ".." for directory traversal does not appear to work
+	--> referring to the ASCII man page, 2e is the hexadecimal for . and 2f is hex for /
+	--> so ../ would be %2e%2e%2f
+
+11. using http://challenge.localhost:80/filesystem/%2e%2e%2f/%2e%2e%2f/flag gives the password
+
+12. Flag for Path Traversal 1: pwn.college{ELJGJFmDRPR4dNLgGq1AKhJYf_0.QX3gzMzwyN0gTN4EzW}
+
+##################################################################################################
