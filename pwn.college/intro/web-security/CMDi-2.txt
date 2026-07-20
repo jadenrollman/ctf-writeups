@@ -1,0 +1,16 @@
+######################################## CMDi 2 ########################################
+
+*NOTE* the semicolon (;) CANNOT be used in this challenge!
+
+1. server python script is almost identical to CMDi-1, except theres an extra function to ignore the semicolon
+	--> no matter, the instructions remind us about the pipe features of the command line
+	--> the command to show the flag should be the same, except use a pipe hexadecimal in place of semicolon
+
+2. using curl -v http://challenge.localhost:80/event?subdirectory=%20%7c%20%63%61%74%20%2f%66%6c%61%67 shows the flag
+	--> this proves my hypothesis is correct: the hexadecimal for the pipe (|) ascii symbol is 7c
+	--> added extra spacing in between the original command, pipe, and second command for good measure
+	--> command ran by the sever script: ls -l  | cat /flag
+
+3. flag for CMDi-2: pwn.college{81z_-5-M9547iupWssyqFk7ZISg.QX0YTN2wyN0gTN4EzW}
+
+########################################################################################
