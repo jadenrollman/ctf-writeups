@@ -1,0 +1,16 @@
+######################################## CMDi 4 ########################################
+
+1. looking at the server script, the command variable is set to "TZ={arg} date"
+
+2. running TZ= by itself is a valid UNIX command
+	--> can easily use previous methods to inject the cat /flag command
+
+3. adding a semicolon at the very beginning and very end of the injection is necessary
+	--> TZ variable is being edited, followed by injected command, followed by the date command
+	--> REMINDER: the hexadecimal value for the ascii symbol ; is 3b
+
+4. using curl -v http://challenge.localhost:80/milestone?time-area=%3b%63%61%74%20%2f%66%6c%61%67%3b gets the flag
+
+5. flag for CMDi 4: pwn.college{o930m9kz_9qtrw6wQaboysYClKb.QX4gzMzwyN0gTN4EzW}
+
+########################################################################################

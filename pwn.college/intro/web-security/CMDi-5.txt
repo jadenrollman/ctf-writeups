@@ -1,0 +1,20 @@
+######################################## CMDi 5 ########################################
+
+*NOTE* the touch command will not output anything upon success!
+
+1. looking at the server script, the command being run is "touch {arg}"
+	--> running the script will cause the link to create a new directory called PWN
+
+2. running the cat command through curl doesn't work
+	--> the flag needs to go to a new file, hence the touch command
+	--> input redirection (<) must be used, the hex value is 3cA
+	--> input redirection cannot be used with touch!
+
+3. using curl -v http://challenge.localhost:80/level?path=%61%3b%63%61%74%20%2f%66%6c%61%67%20%3e%20%61 puts the flag into a file
+	--> a new file, titled 'a' is created with touch
+	--> using chaining, we cat the contents of /flag with input redirection to the newly created file
+	--> using cat on a will reveal the flag
+
+4. flag for CMDi 5: pwn.college{I-rtyMu4HTRd-bh8PRSsKD2YNDj.QX3YTN2wyN0gTN4EzW}
+
+########################################################################################

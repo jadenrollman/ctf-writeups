@@ -1,0 +1,5 @@
+######################################## CMDi 6 ########################################
+
+1. looking at the server script, a bunch of symbols are set to be replaced by blanks
+	--> characters that can't be used: ; & | > < ( ) ` $
+	--> the script is set to run the ls -l command
